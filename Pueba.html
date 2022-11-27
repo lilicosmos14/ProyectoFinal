@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <script>
+        function validar(e){
+            tecla = e.keyCode;
+            if(tecla == 13){
+                if(document.getElementById("caja").value == "true"){
+                    swal("Bien!", "Dato ingresado correctamente!", "success");
+                }
+                else{
+                    swal("Error!", "Dato ingresado correcto!", "error");
+                }
+                document.getElementById("caja").value = "";
+            }
+        }
+    </script>
+    <h1>Kenya Josselin Garcia Salazar</h1>
+    Captura true o false. <br>
+    Estado de la bandera
+    <input type="text" onkeypress="validar(event)" id="caja">
+</body>
+</html>
