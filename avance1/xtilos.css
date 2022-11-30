@@ -1,0 +1,70 @@
+
+.contenedor2{
+  display:grid;
+  grid-template-columns: auto;
+  justify-content: center;  
+  
+}
+
+.contenedor{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 10px;
+	grid-auto-rows: minmax(100px, auto);
+	justify-content: center;
+	align-items: center;
+}
+
+.izquierdaAbajo{
+display: grid;
+	justify-content: flex-start;
+}
+
+
+.derecha{
+	display: grid;
+	justify-content: center;
+}
+
+ 
+.estiloformulario{
+	margin-left: 20px;
+    border: 1px solid black;
+    padding: 20px;
+    background-color:white;
+    border-radius: 10px;
+}
+
+
+
+.wrapper {
+  background-color: white;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 3px;
+   
+}
+.form-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5em;
+}
+.form-row > label {
+  padding: .5em 1em .5em 0;
+  flex: 1;
+}
+.form-row > input {
+  flex: 2;
+}
+.form-row > input,
+.form-row > button {
+  padding: .5em;
+}
+.form-row > button {
+background: gray;
+color: white;
+border: 0;
+}
+
+
+ 

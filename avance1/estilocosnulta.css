@@ -1,0 +1,38 @@
+.cards{
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	justify-content: space-around;
+	align-items: center;
+}
+
+.container{
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+
+.formulario{
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: center;
+	align-items: center;
+}
+
+
+
+.card .card-img-top {
+transition: .5s ease;
+}
+
+.card .card-img-top:hover{
+box-shadow:
+1px 1px #d06363,
+2px 2px #d06363,
+3px 3px #d06363,
+4px 4px #d06363,
+5px 5px #d06363,
+6px 6px #d06363;
+-webkit-transform: translateX(-3px);
+transform: translateX(-3px);
+transition: .5s ease;
+}
