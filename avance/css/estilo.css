@@ -1,0 +1,46 @@
+body{
+    display: grid;
+}
+
+.main .texto{grid-area: tex;}
+.main .imagen{grid-area: img;}
+
+.servicios .a1{grid-area: andres;}
+.servicios .a2{grid-area: ari;}
+.servicios .a3{grid-area: alex;}
+.servicios .a4{grid-area: kenya;}
+
+
+.main{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "tex img";
+}
+
+
+
+.servicios{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "andres ari alex kenya";
+}
+
+@media screen and (max-width: 768px){
+    .img{
+        width: 200px;
+    }
+    .main{
+        text-align: center;
+        grid-template-columns: 1fr;
+        grid-template-areas: "tex"
+                            "img";
+    }
+    .servicios{
+        text-align: center;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-areas: "andres ari"
+                            "alex kenya";
+    }   
+}
