@@ -1,7 +1,8 @@
 <?php
     session_start();
-    if(!empty($_POST["captcha"]) && $_POST["captcha"] == $_POST["respuesta"]){
-        
+    if(strcasecmp($_SESSION['captcha'], $_POST['securityCode']) != 0){
+            header("Location:login.php?errorEmail=1");
+        }else{    
         $acum=0;
 
         $ip=$_SERVER['REMOTE_ADDR'];
@@ -25,7 +26,7 @@
             
         }    
         
-        $conn = new mysqli("localhost","id19992557_root","J~]29KNF[/k?~ci9","id19992557_usuarios");
+        $conn = new mysqli("localhost","id19983707_root","H{t(VHuznLE0qm*R","id19983707_usuarios");
         if($conn->connect_errno){
             echo "No hay conexion: (".$conn->connect_errno.")".$conn->connect_error;
         }
@@ -61,10 +62,6 @@
                     # Luego redireccionamos a la pagina "Secreta"
                     header("Location: inicio.php");
                 }else{
-                    //echo "<script>alert('Error al iniciar sesion');</script>";
-                    echo "<div class='alert alert-secondary' role='alert'> Usuario o contraseña equivocados <a href='#' class='alert-link'></a></div>";
-                    echo "<br><a href='login.php'><button type='button' class='btn btn-secondary'>Regresar</button></a>";
-                    
                     if(isset($_COOKIE["$usuario"])){
                         $cont = $_COOKIE["$usuario"];
                         $cont++;
@@ -75,28 +72,14 @@
                     }else{
                         setcookie($usuario,1,time()+3600);
                     }
+                    header("Location:login.php?errorEmail=1");
                 }
             }
             }
         }catch(Exception $ex){
             
         }
-        /*else{
-            # No coinciden, asi  que simplemente imprimimos un
-            # mensaje diciendo que es incorrecto
-            echo "El usuario o la contrasena son incorrectos";
-            $_SESSION['intentos'] += 1; 
-            if($_SESSION['intentos'] == 3 ){
-                echo "\n La cuenta ha sido bloqueada por exceso de intentos";
-            }
-        }*/
-    }else{
-        echo "<div id='msg'></div>
-            <!-- Mensajes de Verificación -->
-            <div id='error' class='alert alert-danger ocultar' role='alert'>
-                Captcha incorrecto!
-            </div>";
-    }      
+    }
 ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
