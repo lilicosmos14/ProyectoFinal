@@ -1,10 +1,5 @@
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
 <?php
-$con = new mysqli("localhost","id19772720_root","UCSwc<gmtXe4Tiy<","id19772720_usuarios");
+$con = new mysqli("localhost","id19772720_root","^ypH0|r[n&i0/Pfx","id19772720_usuarios");
 if($con->connect_errno){
     echo "No hay conexion: (".$con->connect_errno.")".$con->connect_error;
 }
@@ -25,6 +20,7 @@ if($cantidadConsulta ==0){
 }else{
     if(isset($_POST['enviar'])){
         if(!empty( !empty($_POST['email'] ) )){
+            $pass_fuerte = password_hash($clave,PASSWORD_DEFAULT);
             $updateClave    = ("UPDATE usuarios SET Contraseña='$clave' WHERE Correo='".$correo."' ");
             $queryResult    = mysqli_query($con,$updateClave); 
                 $variable2=$_POST['email'];
@@ -35,9 +31,9 @@ if($cantidadConsulta ==0){
 
             if($email){
                     echo  "<div class='alert alert-info'>
-                            <strong>Enviado!</strong> Revise su bandeja de entrada para que pueda visualizar su correo.
+                            <strong>Enviado!</strong> Revise su bandeja de entrada para que pueda visualizar su correo y proceda al formulario
                         </div>";
-                    echo "<br><a href='login.php'><button type='button' class='btn btn-secondary'>Regresar</button></a>";
+                    echo "<br><a href='formulario.php'><button type='button' class='btn btn-secondary'>Regresar</button></a>";
                 
             }
         }
@@ -47,3 +43,5 @@ if($cantidadConsulta ==0){
 }
 
 ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
