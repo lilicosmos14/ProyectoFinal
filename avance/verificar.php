@@ -1,10 +1,5 @@
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
-
 <?php
+    session_start();
     if(!empty($_POST["captcha"]) && $_POST["captcha"] == $_POST["respuesta"]){
         
         $acum=0;
@@ -20,16 +15,17 @@
             echo "<h2 style='color:green;'><br> Verificar reCaptcha</h2>";
         }
         
+        $usuario = $_REQUEST["usuario"];
+        $palabra_secreta = $_POST["palabra_secreta"];
+        
+        
         if(!empty($_POST["remember"])){
             setcookie ("usuario",$_POST["usuario"],time()+3600);
             setcookie ("palabra_secreta",$_POST["palabra_secreta"],time()+3600);
             
         }    
         
-        $usuario = $_REQUEST["usuario"];
-        $palabra_secreta = $_POST["palabra_secreta"];
-        
-        $conn = new mysqli("localhost","root","","usuarios");
+        $conn = new mysqli("localhost","id19992557_root","J~]29KNF[/k?~ci9","id19992557_usuarios");
         if($conn->connect_errno){
             echo "No hay conexion: (".$conn->connect_errno.")".$conn->connect_error;
         }
@@ -45,16 +41,26 @@
                 echo "<br><a href='login.php'><button type='button' class='btn btn-secondary'>Regresar</button></a>";
                 echo "<br><a href='formulario.php'><button type='button' class='btn btn-secondary'>Recuperar Contraseña</button></a>";
             }else{
+                //INICIO DE SESION ADMIN
+                if($usuario=="Administrador"){
+                    if($nr == 1 &&(password_verify($palabra_secreta,$buscarpass['Contraseña']))){
+                        echo "<div class='alert alert-secondary' role='alert'> Bienvenido Administrado ¿Listo para continuar? <a href='#' class='alert-link'></a></div>";
+                        //ANDRES, AQUI CAMBIAS EL HREF AL QUE HAYAS PHP QUE HAYAS HECHO PARA EL ADMIN
+                        echo "<br><a href=' '><button type='button' class='btn btn-secondary'>Continuar</button></a>";
+                    }else{
+                        echo "<div class='alert alert-secondary' role='alert'> Usuario o contraseña equivocados <a href='#' class='alert-link'></a></div>";
+                        echo "<br><a href='login.php'><button type='button' class='btn btn-secondary'>Regresar</button></a>";
+                    }
+                }else{
                 if($nr == 1 &&(password_verify($palabra_secreta,$buscarpass['Contraseña']))){
-                    session_start();
                     $micarrito=[];
 
                     $_SESSION["usuario"] = $usuario;
-                    $_SESSION["nombre"] = $nombre;
                     $_SESSION["compras"] = $micarrito;
 
                     # Luego redireccionamos a la pagina "Secreta"
-                    header("Location: inicio.php");
+                    echo "<div class='alert alert-secondary' role='alert'> Cuenta Correcta <a href='#' class='alert-link'></a></div>";
+                    echo "<br><a href='inicio.php'><button type='button' class='btn btn-secondary'>Continuar</button></a>";
                 }else{
                     //echo "<script>alert('Error al iniciar sesion');</script>";
                     echo "<div class='alert alert-secondary' role='alert'> Usuario o contraseña equivocados <a href='#' class='alert-link'></a></div>";
@@ -71,6 +77,7 @@
                         setcookie($usuario,1,time()+3600);
                     }
                 }
+            }
             }
         }catch(Exception $ex){
             
@@ -92,4 +99,5 @@
             </div>";
     }      
 ?>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
